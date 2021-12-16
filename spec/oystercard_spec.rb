@@ -46,9 +46,9 @@ describe Oystercard do
       oystercard.touch_in(station)
     end
 
-    it 'touch_out should change the status of in_journey to false' do
+    it 'touch_out should change the status of in_journey? to false' do
       oystercard.touch_out(station)
-      expect(oystercard.in_journey?).to eq false
+      expect(oystercard).to_not be_in_journey
     end
     
     it 'touch_out should deduct fare from balance' do

@@ -31,6 +31,11 @@ class Oystercard
     journey.in_journey?
   end
 
+  # for checking stuff works, not asked for by user stories (so far)
+  def display_journeys
+    journey.journeys_list
+  end 
+
   private
 
   def deduct(amount)
