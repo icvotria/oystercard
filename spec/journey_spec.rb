@@ -39,4 +39,10 @@ describe Journey do
       expect(journey.exit_station).to eq nil
     end
   end
+
+  describe 'fare' do
+    it 'returns the minimum fare' do
+      expect(journey.fare).to eq Journey::MINIMUM_FARE
+    end
+  end
 end

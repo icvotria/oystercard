@@ -3,7 +3,6 @@ require_relative 'journey'
 class Oystercard
   BALANCE_LIMIT = 90
   MINIMUM_LIMIT = 1
-  MINIMUM_FARE = 2
   
   attr_reader :journey, :balance, :journeys_list
 
@@ -23,7 +22,7 @@ class Oystercard
   end
   
   def touch_out(station)
-    deduct(MINIMUM_FARE)
+    deduct(Journey::MINIMUM_FARE)
     journey.end(station)
   end
   

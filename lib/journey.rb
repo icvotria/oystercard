@@ -1,4 +1,6 @@
 class Journey
+  MINIMUM_FARE = 2
+  PENALTY_FARE = 6
 
   attr_reader :journeys_list, :entry_station, :exit_station
 
@@ -13,6 +15,10 @@ class Journey
   def end(station)
     @exit_station = station
     save_journey(@entry_station, @exit_station)
+  end
+
+  def fare
+    MINIMUM_FARE
   end
   
   def in_journey?

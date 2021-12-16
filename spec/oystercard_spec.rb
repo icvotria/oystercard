@@ -6,7 +6,7 @@ describe Oystercard do
   let(:station) { double :station }
 
   before(:each) do
-    balance = Oystercard::MINIMUM_FARE
+    balance = Journey::MINIMUM_FARE
   end
   
   it 'should respond to #initialize' do # don't forget to refactor!
@@ -52,7 +52,7 @@ describe Oystercard do
     end
     
     it 'touch_out should deduct fare from balance' do
-      expect {oystercard.touch_out(station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_FARE)
+      expect {oystercard.touch_out(station)}.to change{oystercard.balance}.by(-Journey::MINIMUM_FARE)
     end
   end
 end
