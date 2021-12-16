@@ -7,11 +7,11 @@ describe Journey do
 
   describe 'start' do
     before(:each) do
-      journey.start("Elephant & Castle")
+      journey.start(entry_station)
     end
 
     it 'saves the entry station' do
-      expect(journey.entry_station).to eq "Elephant & Castle"
+      expect(journey.entry_station).to eq entry_station
     end
 
     it 'returns true when touch_in not followed by touch_out' do
@@ -21,12 +21,12 @@ describe Journey do
 
   describe 'end' do
     before(:each) do
-      journey.start("Elephant & Castle")
-      journey.end("Home")
+      journey.start(entry_station)
+      journey.end(exit_station)
     end
 
     it 'saves a journey' do
-      expect(journey.journeys_list).to eq([{:in => "Elephant & Castle", :out => "Home"}])
+      expect(journey.journeys_list).to eq([{:in => entry_station, :out => exit_station}])
     end
   end
 
