@@ -1,30 +1,39 @@
+require_relative 'journey'
+
 class Oystercard
   BALANCE_LIMIT = 90
   MINIMUM_LIMIT = 1
   MINIMUM_FARE = 2
-  attr_reader :balance, :in_journey
+  
+  attr_reader :journey, :balance, :journeys_list
+
   def initialize(balance = 5)
+    @journey = Journey.new
     @balance = balance
-    @in_journey = false
-    
   end
+  
   def top_up(amount)
     raise "Error: £#{BALANCE_LIMIT} limit reached" if balance + amount > BALANCE_LIMIT
     @balance += amount
   end
+  
+  def touch_in(station)
+    raise 'You haven\'t got enough money' if balance < MINIMUM_LIMIT
+    journey.start(station)
+  end
+  
+  def touch_out(station)
+    deduct(MINIMUM_FARE)
+    journey.end(station)
+  end
+  
+  def in_journey?
+    journey.in_journey?
+  end
+
+  private
+
   def deduct(amount)
     @balance -= amount
   end
-  def touch_in
-    raise 'You haven\'t got enough money' if balance < MINIMUM_LIMIT
-    @in_journey = true
-  end
-  def touch_out
-    deduct(MINIMUM_FARE)
-    @in_journey = false
-  end
-  def in_journey?
-   @in_journey
-  end
-  
 end
