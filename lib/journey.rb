@@ -27,7 +27,7 @@ class Journey
     @complete ? MINIMUM_FARE : PENALTY_FARE
   end
 
-  def in_journey?
+  def in_journey? # redundant?
     !@complete
   end
 

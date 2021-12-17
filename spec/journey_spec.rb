@@ -8,8 +8,8 @@ describe Journey do
   let(:exit_station) { double :station }
 
   describe 'complete?' do
-    let(:in_journey?) { true }
     it 'returns false when still in journey' do
+      journey.start(entry_station)
       expect(journey).to_not be_complete
     end
   end
