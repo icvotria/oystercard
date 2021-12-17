@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Journey methods for Oystercard
 class Journey
   MINIMUM_FARE = 2
   PENALTY_FARE = 6
@@ -23,7 +26,7 @@ class Journey
   def fare
     @complete ? MINIMUM_FARE : PENALTY_FARE
   end
-  
+
   def in_journey?
     !@complete
   end
@@ -35,7 +38,7 @@ class Journey
   private
 
   def save_journey(entry_station, exit_station)
-    journeys_list << {:in => entry_station, :out => exit_station}
+    journeys_list << { in: entry_station, out: exit_station }
     @entry_station = nil
     @exit_station = nil
   end
