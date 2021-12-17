@@ -4,23 +4,22 @@ require 'journey'
 
 describe Journey do
   subject(:journey) { described_class.new }
-  let(:entry_station) { double :station }
-  let(:exit_station) { double :station }
+  let(:station) { double :station }
 
   describe 'complete?' do
     it 'returns false when still in journey' do
-      journey.start(entry_station)
+      journey.start(station)
       expect(journey).to_not be_complete
     end
   end
 
   describe 'start' do
     before(:each) do
-      journey.start(entry_station)
+      journey.start('Kings Cross')
     end
 
     it 'saves the entry station' do
-      expect(journey.entry_station).to eq entry_station
+      expect(journey.stations).to eq({ in: 'Kings Cross', out: nil })
     end
 
     it 'returns true when touch_in not followed by touch_out' do
@@ -30,35 +29,31 @@ describe Journey do
 
   describe 'end' do
     before(:each) do
-      journey.start(entry_station)
-      journey.end(exit_station)
+      journey.start('Kings Cross')
+      journey.end('The Moon')
     end
 
     it 'saves a journey' do
-      expect(journey.journeys_list).to eq([{ in: entry_station, out: exit_station }])
+      expect(journey.journeys_list).to eq([{ in: 'Kings Cross', out: 'The Moon' }])
     end
   end
 
   describe 'save journey' do
-    it 'resets exit station to nil' do
-      expect(journey.entry_station).to eq nil
-    end
-
-    it 'resets exit station to nil' do
-      expect(journey.exit_station).to eq nil
+    it 'resets stations to nil' do
+      expect(journey.stations).to eq({ in: nil, out: nil })
     end
   end
 
   describe 'fare' do
     it 'returns the minimum fare after touch in and out' do
-      journey.start(entry_station)
-      journey.end(exit_station)
+      journey.start('Kings Cross')
+      journey.end('The Moon')
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
 
     it 'returns the penalty fare if no exit station' do
-      journey.start(entry_station)
-      # journey.start(entry_station)
+      journey.start('Kings Cross')
+      journey.start('Elephant & Castle')
 
       expect(journey.fare).to eq Journey::PENALTY_FARE
     end
