@@ -19,8 +19,8 @@ class Journey
 
   def end(station)
     @exit_station = station
-    save_journey(@entry_station, @exit_station)
     @complete = true
+    save_journey(@entry_station, @exit_station)
   end
 
   def fare
