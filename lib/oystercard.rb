@@ -7,7 +7,7 @@ class Oystercard
   BALANCE_LIMIT = 90
   MINIMUM_LIMIT = 1
 
-  attr_reader :journey, :balance, :journeys_list
+  attr_reader :journey, :balance
 
   def initialize(balance = 5)
     @journey = Journey.new
@@ -23,21 +23,21 @@ class Oystercard
   def touch_in(station)
     raise 'You haven\'t got enough money' if balance < MINIMUM_LIMIT
 
-    journey.start(station)
+    journey.entry_station(station)
   end
 
   def touch_out(station)
     deduct(journey.fare)
-    journey.end(station)
+    journey.exit_station(station)
   end
 
   def in_journey?
-    journey.in_journey?
+    !journey.complete?
   end
 
-  # for checking stuff works, not asked for by user stories (so far)
+  # for irb tests
   #def display_journeys
-  #  journey.journeys_list
+  #  journey.return_log
   #end
 
   private
