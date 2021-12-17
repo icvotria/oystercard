@@ -9,7 +9,7 @@ class Journey
 
   def initialize
     @journeys_list = []
-    @complete = true
+    @complete = false
   end
 
   def start(station)
@@ -19,8 +19,8 @@ class Journey
 
   def end(station)
     @exit_station = station
-    @complete = true
     save_journey(@entry_station, @exit_station)
+    @complete = true
   end
 
   def fare

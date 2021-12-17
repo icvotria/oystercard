@@ -50,7 +50,9 @@ describe Journey do
   end
 
   describe 'fare' do
-    it 'returns the minimum fare' do
+    it 'returns the minimum fare after touch in and out' do
+      journey.start(entry_station)
+      journey.end(exit_station)
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
 
